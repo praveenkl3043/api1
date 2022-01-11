@@ -1,39 +1,15 @@
-function add () {
-  var num1=document.getElementById("first").value;
-  var num2=document.getElementById("second").value;
-  result=(parseInt(num1) + parseInt(num2))
-  console.log(result);
-
-  document.getElementsByClassName("output")[0].innerHTML=
-  "Ansewr  is"+" "+ result;
-}
-
-function sub () {
-  var num1=document.getElementById("first").value;
-  var num2=document.getElementById("second").value;
-  result=(parseInt(num1) - parseInt(num2))
-  console.log(result);
-
-  document.getElementsByClassName("output")[0].innerHTML=
-  "Ansewr  is"+" "+ result;
-}
-
-function mul () {
-  var num1=document.getElementById("first").value;
-  var num2=document.getElementById("second").value;
-  result=(parseInt(num1) * parseInt(num2))
-  console.log(result);
-
-  document.getElementsByClassName("output")[0].innerHTML=
-  "Ansewr  is"+" " +result;
-}
-
-function div () {
-  var num1=document.getElementById("first").value;
-  var num2=document.getElementById("second").value;
-  result=(parseInt(num1) / parseInt(num2))
-  console.log(result);
-
-  document.getElementsByClassName("output")[0].innerHTML=
-  "Ansewr  is"+" "+ result;
+let y=Math.floor(Math.random()* 50 + 1);
+console.log(y);
+var guess=1;
+document.getElementById("submitguess").onclick = function() {
+  let x=document.getElementById("guessfield").value;
+  if(x == y) {
+    alert("its right" )
+  }else if(x >y){
+    guess++;
+    alert("Enter smaller number" );
+  }else{
+    guess++;
+    alert("Enter larger number");
+  }
 }
