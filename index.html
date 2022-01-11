@@ -5,9 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
 <body>
-    <a href="index1.html">survey form</a><br>
-    <a href="index2.html">mini project</a>
+   <div class="container">
+       <div class="pane panel-primary">
+           <div class="panel-heading">calculator</div>
+           <div class="row">
+               <div class="col-md-6 form group">
+               <label for="">First value</label>
+               <input type="text" id="first" class="firstvalue"><br>
+               <label for="">Second value</label>
+               <input type="text" id="second" class="secondvalue">
+
+               <br>
+               <button onclick="add()" class="btn btn-primary">ADD</button>
+               <button onclick="sub()" class="btn btn-primary">SUB</button>
+               <button onclick="mul()" class="btn btn-primary">MUL</button>
+               <button onclick="div()" class="btn btn-primary">DIV</button>
+           </div>
+           </div>
+       </div>
+       <h1 class="output"></h1>
+   </div>
+   <script src="index.js"></script>
 </body>
 </html>
