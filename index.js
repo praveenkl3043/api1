@@ -1,27 +1,77 @@
-let display = document.getElementById('display');
+let selectedRow = null;
 
-let buttons = Array.from(document.getElementsByClassName('button'));
+function onFormSubmit() {
+  var formData = readFormData();
 
-buttons.map( button => {
-    button.addEventListener('click', (e) => {
-        switch(e.target.innerText){
-            case 'C':
-                display.innerText = '';
-                break;
-            case '=':
-                try{
-                    display.innerText = eval(display.innerText);
-                } catch {
-                    display.innerText = "Error"
-                }
-                break;
-            case '←':
-                if (display.innerText){
-                   display.innerText = display.innerText.slice(0, -1);
-                }
-                break;
-            default:
-                display.innerText += e.target.innerText;
-        }
-    });
-});
+  if (selectedRow == null) insertNewRecord(formData);
+  else updateRecord(formData);
+
+  resetForm();
+}
+
+function readFormData() {
+  
+  const formData = {};
+  formData["fullname"] = document.getElementById("fullname").value;
+  formData["empCode"] = document.getElementById("empCode").value;
+  formData["salary"] = document.getElementById("salary").value;
+  formData["city"] = document.getElementById("city").value;
+  return formData;
+  
+}
+
+function insertNewRecord(data) {
+  let table = document
+    .getElementById("employeeList")
+    .getElementsByTagName("tbody")[0];
+
+  
+  var newRow = table.insertRow(table.length);
+  cell1 = newRow.insertCell(0);
+  cell1.innerHTML = data.fullname;
+  cell2 = newRow.insertCell(1);
+  cell2.innerHTML = data.empCode;
+  cell3 = newRow.insertCell(2);
+  cell3.innerHTML = data.salary;
+  cell4 = newRow.insertCell(3);
+  cell4.innerHTML = data.city;
+  cell5 = newRow.insertCell(4);
+  cell5.innerHTML = `
+  <button class="btn btn-primary" onClick="onEdit(this)">Edit</button>
+  <button class="btn btn-primary" onClick="onDelete(this)">Delete</button>
+  `;
+}
+
+
+function resetForm() {
+  document.getElementById("fullname").value = "";
+  document.getElementById("empCode").value = "";
+  document.getElementById("salary").value = "";
+  document.getElementById("city").value = "";
+  selectedRow = null;
+}
+
+
+function onEdit(td) {
+  selectedRow = td.parentElement.parentElement;
+  document.getElementById("fullname").value = selectedRow.cells[0].innerHTML;
+  document.getElementById("empCode").value = selectedRow.cells[1].innerHTML;
+  document.getElementById("salary").value = selectedRow.cells[2].innerHTML;
+  document.getElementById("city").value = selectedRow.cells[3].innerHTML;
+}
+
+
+function updateRecord(formData) {
+  selectedRow.cells[0].innerHTML = formData.fullname;
+  selectedRow.cells[1].innerHTML = formData.empCode;
+  selectedRow.cells[2].innerHTML = formData.salary;
+  selectedRow.cells[3].innerHTML = formData.city;
+}
+
+function onDelete(td) {
+  if (confirm("Do you want to Delete this Employee Data ? ")) {
+    row = td.parentElement;
+    document.getElementById("employeeList").deleteRow(row.rowIndex);
+    resetForm();
+  }
+}
